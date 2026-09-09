@@ -1,0 +1,10 @@
+// 远程共享/子表-结算
+// 云平台接口：POST https://bzp.iyunmu.com/bzp_backup/ymSdk/remote_settlement_share_meter
+// 编程式：api.remote_settlement_share_meter({}（参数透传）)  本地路由 /remote/settlement/share/meter（仅本地服务，云端路径见上）
+
+module.exports = (params, createRequest) =>
+  createRequest({
+    url: '/ymSdk/remote_settlement_share_meter',
+    method: 'POST',
+    data: { ...params },
+  })

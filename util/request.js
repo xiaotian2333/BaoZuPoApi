@@ -61,11 +61,13 @@ async function createCloudRequest(options = {}) {
 
   let resp
   try {
+    const methodUpper = String(method).toUpperCase()
     resp = await axios({
       baseURL: baseUrl,
       url,
-      method,
-      data: body,
+      method: methodUpper,
+      // 云平台 GET 接口参数走 query（与小程序 $u.get 一致），写操作才走加密 body
+      ...(methodUpper === 'GET' ? { params: data } : { data: body }),
       headers: reqHeaders,
       validateStatus: () => true, // 统一处理：不抛非 2xx，由调用方决定
       timeout: 15000,
